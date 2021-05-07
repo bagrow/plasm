@@ -97,6 +97,10 @@ the same data over and over. In a meeting, internal presentation, or even during
 You can often tell plasm is working by noticing that only a small subset of plots in a spread are useful. For instance, above we show an example using `chasm` to look at three normal distributions. A log-scaled x-axis does not make much sense for such distributions and, sure enough, those plots are not informative in the example. But now we have a spread we can save away just in case we are ever asked for a different axes scaling.
 
 
+* _Not good for presentations, I thought this was for meetings?_
+
+By meetings, I really mean _internal_ meetings, such as meeting with a research supervisor or some collaborators on a project. I don't mean conferences. By the time you are presenting results at a conference, you should already know which way to plot the data.
+
 * _This is dumb. I could have easily coded it up myself._
 
 True. Now you don't have to. Also, after coding it up, would you have come up with the killer name? :joy:
