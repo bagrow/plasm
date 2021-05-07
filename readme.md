@@ -87,7 +87,7 @@ spasm(X1,Y1, X2,Y2, names=['Expr-1', 'Expr-2'])
 
 * _Why worry about log scales?_
 
-It's very common when performing exploratory data analysis to encountered non-normal data, data that are skewed in some manner. It may be that a few extreme outliers crush the bulk of the data down into an unreadable space. Or it may be that you are looking if data follow a [particular functional form](https://en.wikipedia.org/wiki/Power_law#Power-law_functions), and it may be easier to discern that form with some manner of logarithmically-scaled axes.
+It's very common when performing exploratory data analysis to encounter non-normal data, data that are skewed in some manner. It may be that a few extreme outliers crush the bulk of the data down into an unreadable space. Or it may be that you are looking if data follow a [particular functional form](https://en.wikipedia.org/wiki/Power_law#Power-law_functions), and it may be easier to discern that form with some manner of logarithmically-scaled axes.
 
 * _Can I use this for papers or presentations?_
 
