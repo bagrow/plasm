@@ -9,9 +9,9 @@ A rough-and-ready tool for preparing all combinations of log- and linear-scaled 
 PLASM consists of two Python functions:
 
 - `CHASM` : Cdf and Histogram Analysis Spread for Meetings
-- `SPASM` : ScatterPlot Analysis Spread for Meetings.
+- `SPASM` : ScatterPlot Analysis Spread for Meetings
 
-Now when you show someone a scatter plot and they ask for a log-scaled x-axis,
+Now when you show a scatter plot to a collaborator during a research meeting and they ask for a log-scaled x-axis,
 for instance, you can pull out the saved SPASM and have every combination of
 log- and linear-scaled axes ready to go.
 
