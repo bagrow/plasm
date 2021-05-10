@@ -103,10 +103,6 @@ You can often tell plasm is working by noticing that only a small subset of plot
 
 By meetings, I really mean _internal_ meetings, such as meeting with a research supervisor or some collaborators on a project. I don't mean conferences. By the time you are presenting results at a conference, you should already know which way to plot the data.
 
-* _This is dumb. I could have easily coded it up myself._
-
-True. Now you don't have to. Also, after coding it up, would you have come up with the killer name? :joy:
-
 
 * _What if I don't like the defaults?_
 
@@ -118,6 +114,14 @@ spasm(X,Y, ls='-')
 
 Of course, there is much more than can be done. Especially for histograms; we have only implemented a basic linear and log-binning, but there are many other ways to go about binning, including integer bins. (That there is so much choice for histogram binning, and that different binnings can change, sometimes drastically, the appearance of the distribution, is a strong argument for relying on the CDF or CCDF!)
 
+
+* _This is dumb. I could have easily coded it up myself._
+
+True. Now you don't have to. Also, after coding it up, would you have come up with the killer name? :joy:
+
+* _Can I share some ribald comments using other -asm words?_
+
+Please, no.
 
 ## License
 
