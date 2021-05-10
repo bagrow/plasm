@@ -43,8 +43,8 @@ X = np.random.randn(n,)
 Y = np.random.randn(n,)+0.4
 Z = np.random.randn(n,)+0.8
 
-name = ["data1","data2","data3"]
-chasm(X, Y, Z, name=name, show_median=True)
+names = ["data1","data2","data3"]
+chasm(X, Y, Z, names=names, show_median=True)
 ```
 
 ![Example CHASM output](figures/example-chasm.png)

@@ -108,7 +108,7 @@ def _autobins(data, log=False):
     return bin_edges, nb
 
 
-def chasm(*data, name='x', filename=None, show_median=False, show_stats=True):
+def chasm(*data, names='x', filename=None, show_median=False, show_stats=True):
     """
     CHASM: Cdf and Histogram Analysis Spread for Meetings.
 
@@ -120,7 +120,7 @@ def chasm(*data, name='x', filename=None, show_median=False, show_stats=True):
 
     Args:
         *data : list, or list of lists, of numeric values.
-        name : name of variable(s), to be used in axis labels.
+        names : names of variable(s), to be used in summary stats.
         filename : name of file to save plot if not None.
         show_median : draw horizontal line on CDFs.
         show_stats : Show summary statistics in right column.
@@ -132,8 +132,8 @@ def chasm(*data, name='x', filename=None, show_median=False, show_stats=True):
         >>> X1 = np.random.randn(1000,)
         >>> X2 = np.random.randn(1000,)+0.4
         >>>
-        >>> name = ["dat1","dat2"]
-        >>> chasm(X1, X2, name=name, show_median=True)
+        >>> names = ["dat1","dat2"]
+        >>> chasm(X1, X2, names=names, show_median=True)
     """
 
     fig,axes = plt.subplots(3,5, figsize=(8.5*1.67,3.5*2))
@@ -183,8 +183,8 @@ def chasm(*data, name='x', filename=None, show_median=False, show_stats=True):
             prcL = np.percentile(dat,  2.5)
             prcR = np.percentile(dat, 97.5)
             lbl = ""
-            if name != "x" and len(name) == len(data):
-                lbl += f"$x =${name[i]}:\n"
+            if names != "x" and len(names) == len(data):
+                lbl += f"$x =${names[i]}:\n"
             lbl += f"mean = {np.mean(dat):0.6f}\n"
             lbl += f"stdv = {np.std(dat):0.6f}\n"
             lbl += f"median = {np.median(dat):0.6f}\n"
@@ -298,8 +298,8 @@ if __name__ == '__main__':
     Z = np.random.randn(n,)+0.8
     #W = 1+np.random.pareto(3, n)
 
-    name = ["data1","data2","data3"]
-    chasm(X, Y, Z, name=name, show_median=True, filename='figures/example-chasm.png')
+    names = ["data1","data2","data3"]
+    chasm(X, Y, Z, names=names, show_median=True, filename='figures/example-chasm.png')
 
 
     n = 150
