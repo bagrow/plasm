@@ -3,7 +3,7 @@
 
 # plasm.py
 # Jim Bagrow
-# Last Modified: 2021-05-06
+# Last Modified: 2021-05-19
 
 """PLASM - PLot Analysis Spreads for Meetings
 
@@ -93,6 +93,7 @@ def _autobins(data, log=False):
     list_maxs = []
     list_nums = []
     for dat in data:
+        dat = np.array(dat) # TODO
         if log:
             dat = np.log(dat[dat>0])
         list_mins.append(min(dat))
