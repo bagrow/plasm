@@ -109,7 +109,7 @@ def _autobins(data, log=False):
     return bin_edges, nb
 
 
-def chasm(*data, names='x', filename=None, show_median=False, show_stats=True):
+def chasm(*data, names='x', filename=None, show_median=False, show_stats=True, show_histograms=True):
     """
     CHASM: Cdf and Histogram Analysis Spread for Meetings.
 
@@ -125,6 +125,7 @@ def chasm(*data, names='x', filename=None, show_median=False, show_stats=True):
         filename : name of file to save plot if not None.
         show_median : draw horizontal line on CDFs.
         show_stats : Show summary statistics in right column.
+        show_historgrams : Show binned histograms on bottom row.
 
     Returns:
         Figure and axes handles for the created plot.
@@ -137,7 +138,10 @@ def chasm(*data, names='x', filename=None, show_median=False, show_stats=True):
         >>> chasm(X1, X2, names=names, show_median=True)
     """
 
-    fig,axes = plt.subplots(3,5, figsize=(8.5*1.67,3.5*2))
+    if show_histograms:
+        fig,axes = plt.subplots(3,5, figsize=(8.5*1.67,3.5*2))
+    else:
+        fig,axes = plt.subplots(2,5, figsize=(8.5*1.67,5))
 
     # get and plot (C)CDF(s)
     for dat in data:
@@ -150,25 +154,30 @@ def chasm(*data, names='x', filename=None, show_median=False, show_stats=True):
         for ax in axes[:2,:-1].flatten():
             ax.axhline(0.5, ls='--', lw=0.75, color='k')
 
-    # get and plot histogram(s)
-    bin_edges_lin, num_bins_lin = _autobins(data)
-    bin_edges_log, num_bins_log = _autobins(data, log=True)
-    bin_edges_log = np.exp(bin_edges_log)
-    alpha = 1 if len(data) == 1 else 0.33
-    for i,dat in enumerate(data):
-        cs = f'C{i}'
-        for c,ax in enumerate(axes[2][:-1]):
-            bin_edges = bin_edges_lin
-            if c in [1,3]:
-                bin_edges = bin_edges_log
-            ax.hist(dat, bins=bin_edges, alpha=alpha, histtype='stepfilled', density=True, color=cs)
-            ax.hist(dat, bins=bin_edges, alpha=1.0,   histtype='step',       density=True, lw=1., color=cs)
+    if show_histograms:
+        # get and plot histogram(s)
+        bin_edges_lin, num_bins_lin = _autobins(data)
+        bin_edges_log, num_bins_log = _autobins(data, log=True)
+        bin_edges_log = np.exp(bin_edges_log)
+        alpha = 1 if len(data) == 1 else 0.33
+        for i,dat in enumerate(data):
+            cs = f'C{i}'
+            for c,ax in enumerate(axes[2][:-1]):
+                bin_edges = bin_edges_lin
+                if c in [1,3]:
+                    bin_edges = bin_edges_log
+                ax.hist(dat, bins=bin_edges, alpha=alpha, histtype='stepfilled', density=True, color=cs)
+                ax.hist(dat, bins=bin_edges, alpha=1.0,   histtype='step',       density=True, lw=1., color=cs)
 
 
     # label and log-ize the plots:
-    for ax in axes[2]:
-        ax.set_xlabel("$x$")
-        ax.set_ylabel("Prob. density", labelpad=2)
+    if show_histograms:
+        for ax in axes[2]:
+            ax.set_xlabel("$x$")
+            ax.set_ylabel("Prob. density", labelpad=2)
+    else:
+        for ax in axes[1]:
+            ax.set_xlabel("$x$")
     for ax in axes[1]:
         ax.set_ylabel("Pr$(X < x)$", labelpad=2)
     for ax in axes[0]:
@@ -176,7 +185,8 @@ def chasm(*data, names='x', filename=None, show_median=False, show_stats=True):
 
     _logize_axes(axes[0,:], title=True)
     _logize_axes(axes[1,:])
-    _logize_axes(axes[2,:])
+    if show_histograms:
+        _logize_axes(axes[2,:])
 
     # add summary stats in fifth panel:
     if show_stats:
@@ -192,14 +202,16 @@ def chasm(*data, names='x', filename=None, show_median=False, show_stats=True):
             lbl += f"    95 = {prcL:0.4f}, {prcR:0.4f}"
             fig.text(0.82,0.9-i*0.15,lbl,
                      fontfamily='monospace', va='top', color=f'C{i}')
-        fig.text(0.82, 0.150, f"Hist. lin. bins: $n={num_bins_lin}$",
-                 fontfamily='monospace', va='top')
-        fig.text(0.82, 0.125, f"Hist. log. bins: $n={num_bins_log}$",
-                 fontfamily='monospace', va='top')
+        if show_histograms:
+            fig.text(0.82, 0.150, f"Hist. lin. bins: $n={num_bins_lin}$",
+                     fontfamily='monospace', va='top')
+            fig.text(0.82, 0.125, f"Hist. log. bins: $n={num_bins_log}$",
+                     fontfamily='monospace', va='top')
         axes[0,4].set_title("Summary statistics", fontsize='medium', ha='right')
     axes[0,4].axis('off')
     axes[1,4].axis('off')
-    axes[2,4].axis('off')
+    if show_histograms:
+        axes[2,4].axis('off')
 
     # sign and finalize the figure:
     fig.text(0.818,0.08, _sign_text(), fontsize='small', va='top')
