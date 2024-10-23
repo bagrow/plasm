@@ -2,8 +2,8 @@
 # -*- coding: utf-8 -*-
 
 # plasm.py
-# Jim Bagrow
-# Last Modified: 2021-05-19
+# Jim Bagrow and Milo Trujillo
+# Last Modified: 2024-10-23
 
 """PLASM - PLot Analysis Spreads for Meetings
 
